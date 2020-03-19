@@ -57,7 +57,7 @@ We provide the pre-trained 243-frame model [here](https://drive.google.com/file/
 python run.py -k cpn_ft_h36m_dbb -arc 3,3,3,3,3 --evaluate pretrained_model.bin
 ```
 
-###Visualization and other functions
+### Visualization and other functions
 
 We keep our code consistent with [VideoPose3D](https://github.com/facebookresearch/VideoPose3D). Please refer to their project page for further information. 
 
