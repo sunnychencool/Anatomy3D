@@ -72,3 +72,7 @@ If you found this code useful, please cite the following paper:
       year={2020}
     }
 
+## Acknowledgement
+
+Part of our code is borrowed from [VideoPose3D](https://github.com/facebookresearch/VideoPose3D). We thank to the authors for releasing codes.
+
