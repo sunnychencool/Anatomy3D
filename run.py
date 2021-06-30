@@ -61,7 +61,7 @@ for subject in dataset.subjects():
         anim['positions_3d'] = positions_3d
 
 print('Loading 2D detections...')
-keypoints = np.load('data/data_2d_' + args.dataset + '_' + args.keypoints + '.npz')
+keypoints = np.load('data/data_2d_' + args.dataset + '_' + args.keypoints + '.npz', allow_pickle=True)
 keypoints_metadata = keypoints['metadata'].item()
 keypoints_symmetry = keypoints['metadata'].item()['keypoints_symmetry']
 kps_left, kps_right = list(keypoints_symmetry[0]), list(keypoints_symmetry[1])
@@ -204,8 +204,9 @@ model_pos = TemporalModel(poses_valid_2d[0].shape[-2], poses_valid_2d[0].shape[-
                             filter_widths=filter_widths, causal=args.causal, dropout=args.dropout, channels=args.channels,
                             dense=args.dense)
 
-model_pos_train=nn.DataParallel(model_pos_train,device_ids=[0,1,2]) # multi-GPU
-model_pos=nn.DataParallel(model_pos,device_ids=[0,1,2]) # multi-GPU
+device_list = [i for i in range(torch.cuda.device_count())]
+model_pos_train=nn.DataParallel(model_pos_train,device_ids=device_list) # multi-GPU
+model_pos=nn.DataParallel(model_pos,device_ids=device_list) # multi-GPU
 
 
 receptive_field = model_pos.module.receptive_field()
